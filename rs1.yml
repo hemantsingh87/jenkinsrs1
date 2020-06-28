@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: xp2web-rs
+
+spec:
+   replicas: 3
+   selector:
+      matchExpressions:
+         - { key: env, operator: In, values: [prod] }
+         - { key: region, operator: In, values: [IN] }
+   template:
+
+      metadata:
+         name: xp2webpod1
+         labels:
+            env: prod
+            region: IN
+            dc: "2"
+
+      spec:
+         containers:
+         -   name: xp2web1-con
+             image: httpd
+
+
